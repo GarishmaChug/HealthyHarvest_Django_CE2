@@ -1,0 +1,16 @@
+# Virtual environment
+myenv/
+
+# Database files
+*.sqlite3
+
+# Ignore log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Static and media files
+staticfiles/
+media/

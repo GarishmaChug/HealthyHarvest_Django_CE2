@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Shopping Cart</h2>
+
+    {% if cart_items %}
+    <!-- Your existing cart table code -->
+    {% else %}
+    <div class="alert alert-info">
+        Your cart is empty. 
+        {% if not user.is_authenticated %}
+        <p>Please <a href="{% url 'login' %}">log in</a> to save your cart.</p>
+        {% endif %}
+        <a href="{% url 'product_list' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
