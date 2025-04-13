@@ -91,13 +91,22 @@
                     <a href="#" style="color: white; text-decoration: none;">Log out</a>
                 </div> 
             </div>
-                
-                <div class="box4"><button style="background-color: green;"><a href="#" style="color: aliceblue;">Log out</a></button></div>
-
-                
-            
-                <!-- <div class="box4"><button><a href="#">Log in</a></button></div>
-                <div class="box5"><button><a href="#">Sign up</a></button></div> -->
+            {% if user.is_authenticated %}
+            <div class="box4">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button style="background-color: green; color: aliceblue;">Log out</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="box4">
+                <button><a href="{% url 'login' %}">Log in</a></button>
+            </div>
+            <div class="box5">
+                <button><a href="{% url 'register' %}">Sign up</a></button>
+            </div>
+        {% endif %}
+        
             
     </nav>
 

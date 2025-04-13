@@ -1,6 +1,91 @@
-from django.shortcuts import render 
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('home')
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        selected_role=request.POST.get('role')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            if(selected_role=='admin' and user.is_superuser) or (selected_role=='user' and not user.is_superuser):
+               login(request, user)
+               messages.success(request, f"Welcome, {username}!")
+               return redirect('dashboard')  
+            else:
+               messages.error(request,"invalid credentials or passsword")
+        # or whatever your post-login page is
+        else:
+           messages.error(request, "Invalid username or password")
+
+    return render(request, 'login.html')
+ 
+
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.shortcuts import render, redirect
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+
+        print("Password:", password)
+        print("Confirm Password:", cpassword)
+
+        if not password or not cpassword:
+            messages.error(request, 'Password and Confirm Password are required')
+        elif password != cpassword:
+            messages.error(request, 'Passwords do not match')
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already used')
+        else:
+            try:
+                validate_password(password)
+                user = User.objects.create_user(
+                    username=username, email=email, password=password)
+                messages.success(request, 'Registration successful! You can now login.')
+                return redirect('login')
+            except ValidationError as e:
+                for error in e:
+                    messages.error(request, error)
+
+    return render(request, 'register.html')
+
+
+
+def dashboard_view(request):
+    return render(request,'dashboard.html')
+@login_required
+def profile_view(request):
+    return render(request,'profile.html')
+@login_required
+def product_view(request):
+    return render(request,'product.html')
+@login_required
+def logout_view(request):
+    logout(request)
+    return render(request,'logout.html')
 # from django.shortcuts import render, redirect, get_object_or_404
 # from .models import CartItem , cart
 
