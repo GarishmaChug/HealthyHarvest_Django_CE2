@@ -48,11 +48,9 @@
 #         if self.user:
 #             return f"Cart for {self.user.username}"
 #         return f"Anonymous cart ({self.session_key})"
-
-
-from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db import models
+
 
 
 class AppUserManager(BaseUserManager):
@@ -114,3 +112,4 @@ class AppUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
