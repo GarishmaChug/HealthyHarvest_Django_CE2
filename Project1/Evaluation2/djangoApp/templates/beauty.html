@@ -141,8 +141,8 @@
         {% for product in beauty_products %}
         <div class="product-card">
             <div class="product-image">
-                <img src="{% static 'images/beauty_products/' %}{{ product.image }}" alt="{{ product.name }}">
-                
+             
+                <img src="{% static product.image %}" alt="{{ product.name }}">                  
             </div>
             <div class="product-info">
                 <div class="product-price">{{ product.price }}</div>

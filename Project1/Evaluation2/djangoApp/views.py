@@ -186,12 +186,6 @@ def fruits_view(request):
 #     return HttpResponse(f"Product {product_id} added to the cart!")
     # Your cart logic here
     # return redirect('pharmacy_products')
-
-
-
-
-
-
 # from django.shortcuts import render, get_object_or_404
 # from .models import Cart, CartItem
 # from django.contrib.auth.decorators import login_required
