@@ -48,4 +48,25 @@
 #             return f"Cart for {self.user.username}"
 
 
+
 from django.db import models
+
+class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('all', 'All'),
+        ('pharmacy', 'Pharmacy'),
+        ('grocery', 'Grocery'),
+        ('beauty', 'Beauty'),
+        ('snacks','Snacks'),
+        
+    ]
+
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)  # 👈 This line lets you pick a category
+    default='all' 
+    def __str__(self):
+        return self.name
+

@@ -145,11 +145,14 @@
         {% for product in products %}
         <div class="product-card">
             <div class="product-image">
-                <img src="{% static 'images/products/' %}{{ product.image }}" alt="{{ product.name }}">
+                <!-- <img src="{% static 'images/products/' %}{{ product.image }}" alt="{{ product.name }}"> -->
+                <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+                
+
                 
             </div>
             <div class="product-info">
-                <div class="product-price">{{ product.price }}</div>
+                <div class="product-price">${{ product.price }}</div>
                 <div class="product-name">{{ product.name }}</div>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
