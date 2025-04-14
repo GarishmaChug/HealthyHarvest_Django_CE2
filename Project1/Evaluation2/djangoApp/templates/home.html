@@ -4,9 +4,42 @@
 
 {% block main_block %}
 <style>
+    #join-team-section {
+    background-color: #f2f2f2;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-radius: 12px;
+}
+
+.join-team-content h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.join-team-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#apply-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#apply-btn:hover {
+    background-color: #218838;
+}
+
   #hero{
   
-  margin-top: 70px; /* adjust as per header height */
+  margin-top: 80px; /* adjust as per header height */
 
 
     height: 230px;
@@ -350,6 +383,14 @@ h1{
                 </div>
             </div>
         </div>
-    </main>
+      
+<div id="join-team-section">
+    <div class="join-team-content">
+        <h2>Want to join our delivery team?</h2>
+        <p>Become a part of HealthyHarvest and help deliver happiness. Apply now to be a delivery partner.</p>
+        <a href="{% url 'apply' %}"><button id="apply-btn">Apply Now</button></a>
+    </div>
+</div>
 
+    </main>
     {% endblock %}

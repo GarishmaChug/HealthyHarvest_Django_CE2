@@ -14,12 +14,6 @@ urlpatterns = [
     path('all', views.all_view, name='all'),
     path('pharmacy', views.pharmacy_view, name='pharmacy'),
     path('fruits', views.fruits_view, name='fruits'),
-    path('beauty', views.beauty_view, name='beauty'),
-    path('snacks', views.snacks_view, name='snacks'),
+    path('all', views.all_view, name='all_products'),
 
-    ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-
-   
+]
