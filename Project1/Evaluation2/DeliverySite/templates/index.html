@@ -1,4 +1,6 @@
+{% extends 'base2.html' %}
 
+{% block main_block %}
 <style>
     :root {
         --primary: #2e7d32;
@@ -19,6 +21,7 @@
         padding: 0;
         color: var(--dark);
         background-color: var(--light);
+     
     }
     
     .container {
@@ -26,9 +29,11 @@
         margin: 0 auto;
         padding: 20px;
         margin-top: 80px;
+     
     }
     
     header {
+        
         background: linear-gradient(135deg, var(--primary), var(--primary-light));
         color: var(--white);
         padding: 80px 20px;
@@ -264,8 +269,10 @@
         }
     }
 </style>
+<div style="height: 80px;"></div>  <!-- Pushes header below fixed navbar -->
 
 <header>
+
     <div class="container">
         <h1>Groceries delivered to your door</h1>
         <p>Order fresh groceries online and get them delivered to your doorstep in no time.</p>
@@ -312,3 +319,4 @@
         <a href="{%url 'apply'%}" class="jobs-button">Apply as a Delivery Person</a>
     </div>
 </section>
+{%endblock%}
