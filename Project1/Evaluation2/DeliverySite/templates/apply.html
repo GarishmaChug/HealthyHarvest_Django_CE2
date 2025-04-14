@@ -1,30 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Apply for Delivery Job</title>
-</head>
-<body>
-    {% extends 'base2.html' %}
-
+{% extends 'base2.html' %}
 
 {% block main_block %}
-    <h2>Delivery Person Application</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
+<div class="container" style="margin-top: 150px; max-width: 600px;margin-bottom: 100px;">
+    <div class="card shadow border-0" style="background-color: #ffffff;">
+        <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4" style="color: #2e7d32;">Delivery Person Application</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+                <div class="mb-3">
+                    <label for="name" class="form-label" style="color: #2e7d32;">Name</label>
+                    <input type="text" class="form-control border-success" name="name" id="name" required>
+                </div>
 
-        <label>Phone:</label><br>
-        <input type="text" name="phone" required><br><br>
+                <div class="mb-3">
+                    <label for="email" class="form-label" style="color: #2e7d32;">Email</label>
+                    <input type="email" class="form-control border-success" name="email" id="email" required>
+                </div>
 
-        <label>Resume (PDF/DOC):</label><br>
-        <input type="file" name="resume" required><br><br>
+                <div class="mb-3">
+                    <label for="phone" class="form-label" style="color: #2e7d32;">Phone</label>
+                    <input type="text" class="form-control border-success" name="phone" id="phone" required>
+                </div>
 
-        <button type="submit">Submit Application</button>
-    </form>
-    {%endblock%}
-</body>
-</html>
+                <div class="mb-4">
+                    <label for="resume" class="form-label" style="color: #2e7d32;">Resume (PDF/DOC)</label>
+                    <input type="file" class="form-control border-success" name="resume" id="resume" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn px-4" style="background-color: #2e7d32; color: white;">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

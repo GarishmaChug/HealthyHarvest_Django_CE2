@@ -94,6 +94,7 @@ def home_view(request):
     return render(request , 'home.html')
 
 
+
 # def beauty_view(request):
 #     return render(request , 'beauty.html')
 

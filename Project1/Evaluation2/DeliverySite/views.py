@@ -14,6 +14,11 @@ from django.contrib.admin.views.decorators import staff_member_required
 #     return user_passes_test(lambda u: u.is_staff)(view_func)
 
 # User application form
+
+
+
+def home(request):
+    return render(request,'index.html')
 def apply_for_job(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -60,8 +65,6 @@ def admin_applications_view(request):
     })
 
 
-# Admin-only status update
-# @admin_required
 def update_status(request, pk, status):
     app = get_object_or_404(DeliveryPersonApplication, pk=pk)
     if status in ['accepted', 'rejected']:
