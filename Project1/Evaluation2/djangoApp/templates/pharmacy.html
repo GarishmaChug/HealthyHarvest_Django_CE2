@@ -138,10 +138,11 @@
     </div> -->
 
     <div class="product-grid">
-        {% for product in pharmacy_products %}
+        {% for product in products %}
         <div class="product-card">
             <div class="product-image">
-                <img src="{% static 'images/pharmacy_products/' %}{{ product.image }}" alt="{{ product.name }}">
+                <!-- <img src="{% static 'images/pharmacy_products/' %}{{ product.image }}" alt="{{ product.name }}"> -->
+                <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
                 
             </div>
             <div class="product-info">
