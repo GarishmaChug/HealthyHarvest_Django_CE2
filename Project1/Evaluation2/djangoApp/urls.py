@@ -16,6 +16,8 @@ urlpatterns = [
     path('fruits', views.fruits_view, name='fruits'),
     path('beauty', views.beauty_view, name='beauty'),
     path('snacks', views.snacks_view, name='snacks'),
-    path('faq',views.faq_view,name='faq')
+    path('faq',views.faq_view,name='faq'),
+    path('cart', views.cart_view, name='cart'),
+    path('checkout', views.checkout_view, name='checkout'),
 
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

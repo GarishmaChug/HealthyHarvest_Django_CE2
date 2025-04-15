@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_block %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>Secure Checkout</h1>
+        
+        <div class="progress-bar">
+            <span>Step 1: Shipping</span>
+            <span>Step 2: Billing</span>
+            <span>Step 3: Payment</span>
+            <span>Step 4: Review</span>
+        </div>
+        
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            
+            <section id="shipping-info">
+                <h2>Shipping Information</h2>
+                {{ shipping_form.full_name }}
+                {{ shipping_form.email }}
+                {{ shipping_form.phone }}
+                {{ shipping_form.address }}
+                {{ shipping_form.city }}
+                {{ shipping_form.state }}
+                {{ shipping_form.zip_code }}
+                {{ shipping_form.country }}
+            </section>
+            
+            <section id="payment-info">
+                <h2>Payment Details</h2>
+                {{ payment_form.card_name }}
+                {{ payment_form.card_number }}
+                {{ payment_form.expiry_date }}
+                {{ payment_form.cvv }}
+                <p>All transactions are secure and encrypted.</p>
+            </section>
+            
+            <section id="discount">
+                <h2>Promo Code</h2>
+                {{ promo_form.promo_code }}
+                <button type="button" id="apply-promo">Apply</button>
+            </section>
+            
+            <section id="review">
+                {{ terms_form.agree_to_terms }}
+                <label for="{{ terms_form.agree_to_terms.id_for_label }}">I agree to the <a href="#">Terms and Conditions</a></label>
+                <button type="submit" class="place-order">Place Order</button>
+            </section>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

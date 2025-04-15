@@ -404,3 +404,17 @@ def snacks_view(request):
 
 def faq_view(request):
     return render(request, 'faq.html')
+
+def checkout_view(request):
+    return render(request, 'checkout.html')
+
+@login_required
+def cart_view(request):
+    cart_items = request.user.cart.items.all()  # Adjust based on your model structure
+    cart_total = sum(item.price * item.quantity for item in cart_items)  # Assuming price is per unit
+    
+    context = {
+        'cart_items': cart_items,
+        'cart_total': cart_total,
+    }
+    return render(request, 'cart.html')

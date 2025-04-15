@@ -104,28 +104,52 @@
         font-weight: bold;
         color: #2e8b57;
         margin: 5px 0;
+        padding-left: 30px;
     }
 
     .product-name {
         font-size: 1.1rem;
         margin: 10px 0;
         color: #333;
+        text-align: center;
+        padding-left: 30px;
     }
 
     .add-to-cart {
         background-color: #28a745;
         color: white;
         border: none;
-        padding: 10px 15px;
-        width: 100%;
+        /* padding: 10px 15px; */
+        width: 170px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 1rem;
         transition: background-color 0.3s;
+        height: 34%;
+        text-align: center;
+    }
+    .buy{
+        background-color: #28a745;
+        color: white;
+        border: none;
+        /* padding: 10px 15px; */
+        width: 170px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+        height: 34%;
+        text-align: center;
     }
 
     .add-to-cart:hover {
         background-color: #218838;
+    }
+    .button{
+        display: flex;
+        height: 100%;
+        width: 170px;
+        gap: 20px;
     }
 </style>
 
@@ -148,7 +172,9 @@
             <div class="product-info">
                 <div class="product-price">${{ product.price }}</div>
                 <div class="product-name">{{ product.name }}</div>
-                <button class="add-to-cart"><a href="#"></a>Add to Cart</button>
+                <div class="button"><button class="add-to-cart"><a href="{%url 'cart'%}"></a>Add to Cart</button>
+                
+                <button class="buy"><a href="#"></a>Buy Now</button></div>
             </div>
         </div>
         {% endfor %}
