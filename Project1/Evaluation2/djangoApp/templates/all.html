@@ -176,8 +176,9 @@
                 <div class="product-price">${{ product.price }}</div>
                 <div class="product-name">{{ product.name }}</div>
                 
-                <div class="button"><button class="add-to-cart"><a href="{%url 'cart'%}"></a>Add to Cart</button>
-                <button class="buy"><a href="#"></a>Buy Now</button></div>
+                 <div class="button"><!--<button class="add-to-cart"><a href="{%url 'cart'%}"></a>Add to Cart</button> -->
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart">Add to Cart</a>
+                <button class="buy"><a href="#"></a>Buy Now</button></div> 
             </div>
         </div>
         {% endfor %}

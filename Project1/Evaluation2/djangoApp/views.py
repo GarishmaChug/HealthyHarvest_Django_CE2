@@ -1,12 +1,15 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from .models import Product, Cart, CartItem
 
-from .models import Product
+
+
+
 
 
 
@@ -410,11 +413,37 @@ def checkout_view(request):
 
 @login_required
 def cart_view(request):
-    cart_items = request.user.cart.items.all()  # Adjust based on your model structure
-    cart_total = sum(item.price * item.quantity for item in cart_items)  # Assuming price is per unit
+    cart_obj, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = cart_obj.items.all()
+    cart_total = sum(item.price * item.quantity for item in cart_items)
     
     context = {
         'cart_items': cart_items,
         'cart_total': cart_total,
     }
-    return render(request, 'cart.html')
+    return render(request, 'cart.html', context)
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart_obj, created = Cart.objects.get_or_create(user=request.user)
+    
+    # Check if product already in cart
+    cart_item, item_created = CartItem.objects.get_or_create(
+        cart=cart_obj,
+        product=product,
+        defaults={'price': product.price}
+    )
+    
+    # If product already exists in cart, increase quantity
+    if not item_created:
+        cart_item.quantity += 1
+        cart_item.save()
+    
+    return redirect('cart')
+
+@login_required
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
+    cart_item.delete()
+    return redirect('cart')
