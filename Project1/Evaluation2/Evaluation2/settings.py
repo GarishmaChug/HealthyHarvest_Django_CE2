@@ -19,13 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SEC-URITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-t=b8ppc0(9jikdy^9fn-ypcrrdjh-$cn)yr_et$1$owa3@m)#_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_URL = 'login'  # Replace 'login' with the name of your login view
 
 
 # Application definition

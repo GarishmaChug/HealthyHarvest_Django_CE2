@@ -7,4 +7,5 @@ urlpatterns = [
     path('applications/<int:pk>/<str:status>/', views.update_status, name='update_status'),
     path('',views.home,name="delivery_home"),
     path('logout/', views.logout_view, name='logout'),
+    path('privacy/',views.privacy,name='privacy')
 ]

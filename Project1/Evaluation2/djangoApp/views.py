@@ -5,11 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from .models import Product, Cart, CartItem
-
-
-
-
 
 
 
@@ -394,56 +389,78 @@ def pharmacy_view(request):
     return render(request, 'pharmacy.html', {'products': products})
 
 def fruits_view(request):
-    products = Product.objects.filter(category='grocery')
-    return render(request, 'fruits&veg.html', {'products': products})
+    fruits_products = [
+    {'name': 'Apple', 'price': '$1.56', 'image': 'apple.png'},
+    {'name': 'Banana', 'price': '$0.53', 'image': 'banana.png'},
+    {'name': 'Mango', 'price': '$1.20', 'image': 'mango.png'},
+    {'name': 'Orange', 'price': '$0.78', 'image': 'orange.png'},
+    {'name': 'Litchi', 'price': '$1.20', 'image': 'litchi.png'},
+    {'name': 'Kiwi', 'price': '$1.48', 'image': 'kiwi.png'},
+    {'name': 'Dragon Fruit', 'price': '$0.76', 'image': 'dragonfruit.png'},
+    {'name': 'Pineapple', 'price': '$1.12', 'image': 'pineapple.png'},
+    {'name': 'Strawberry', 'price': '$1.15', 'image': 'strawberry.png'},
+    {'name': 'Grapes', 'price': '$0.84', 'image': 'grapes.png'},
+    {'name': 'Carrot', 'price': '$0.24', 'image': 'carrot.png'},
+    {'name': 'Pomegranate', 'price': '$1.38', 'image': 'pomegranet.png'},
+    {'name': 'Watermelon', 'price': '$0.42', 'image': 'watermelon.png'},
+    {'name': 'Muskmelon', 'price': '$0.80', 'image': 'muskmelon.png'},
+    {'name': 'Papaya', 'price': '$1.33', 'image': 'papaya.png'},
+    {'name': 'Guava', 'price': '$1.44', 'image': 'guava.png'},
+    {'name': 'Potato', 'price': '$0.36', 'image': 'potato.png'},
+    {'name': 'Tomato', 'price': '$0.48', 'image': 'tomato.png'},
+    {'name': 'Green Chilli', 'price': '$0.17', 'image': 'greenChilli.png'},
+    {'name': 'Cauliflower', 'price': '$0.18', 'image': 'cauliflower.png'},
+    {'name': 'Ginger', 'price': '$0.28', 'image': 'ginger.png'},
+    {'name': 'Capsicum', 'price': '$0.96', 'image': 'capsicum.png'},
+    {'name': 'Mushroom', 'price': '$0.60', 'image': 'mushroom.png'},
+    {'name': 'Garlic', 'price': '$1.02', 'image': 'garlic.png'},
+    {'name': 'Cucumber', 'price': '$0.36', 'image': 'cucumber.png'},
+    {'name': 'Beans', 'price': '$0.35', 'image': 'beans.png'},
+    {'name': 'Radish', 'price': '$0.36', 'image': 'raddish.png'},
+    {'name': 'Lemon', 'price': '$0.36', 'image': 'lemon.png'},
+    {'name': 'Broccoli', 'price': '$0.30', 'image': 'broccoli.png'},
+    {'name': 'Onion', 'price': '$0.60', 'image': 'onion.png'}
 
-def beauty_view(request):
-    products = Product.objects.filter(category='beauty')
-    return render(request, 'beauty.html', {'products': products})
+    ]
+    return render(request, 'fruits&veg.html', {'fruits_products': fruits_products})
+# def add_to_cart(request, product_id):
+    # Logic to handle adding the product to a cart
+#     return HttpResponse(f"Product {product_id} added to the cart!")
+    # Your cart logic here
+    # return redirect('pharmacy_products')
+# from django.shortcuts import render, get_object_or_404
+# from .models import Cart, CartItem
+# from django.contrib.auth.decorators import login_required
 
-def snacks_view(request):
-    products = Product.objects.filter(category='snacks')
-    return render(request, 'snacks.html', {'products': products})
+# def get_or_create_cart(request):
+#     """Helper function to get or create cart for both authenticated and anonymous users"""
+#     if request.user.is_authenticated:
+#         cart, created = Cart.objects.get_or_create(user=request.user)
+#     else:
+#         if not request.session.session_key:
+#             request.session.create()
+#         cart, created = Cart.objects.get_or_create(
+#             session_key=request.session.session_key,
+#             user=None
+#         )
+#     return cart
 
-def faq_view(request):
-    return render(request, 'faq.html')
-
-def checkout_view(request):
-    return render(request, 'checkout.html')
-
-@login_required
-def cart_view(request):
-    cart_obj, created = Cart.objects.get_or_create(user=request.user)
-    cart_items = cart_obj.items.all()
-    cart_total = sum(item.price * item.quantity for item in cart_items)
+# def cart_detail(request):
+#     cart = get_or_create_cart(request)
+#     cart_items = cart.items.all()
+#     cart_total = sum(item.get_total_price() for item in cart_items)
     
-    context = {
-        'cart_items': cart_items,
-        'cart_total': cart_total,
-    }
-    return render(request, 'cart.html', context)
+#     return render(request, 'cart.html', {
+#         'cart_items': cart_items,
+#         'cart_total': cart_total
+#     })
 
-@login_required
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    cart_obj, created = Cart.objects.get_or_create(user=request.user)
-    
-    # Check if product already in cart
-    cart_item, item_created = CartItem.objects.get_or_create(
-        cart=cart_obj,
-        product=product,
-        defaults={'price': product.price}
-    )
-    
-    # If product already exists in cart, increase quantity
-    if not item_created:
-        cart_item.quantity += 1
-        cart_item.save()
-    
-    return redirect('cart')
+# @login_required
+# def add_to_cart(request, product_id):
+#     # Your existing add to cart logic
+#     pass
 
-@login_required
-def remove_from_cart(request, item_id):
-    cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
-    cart_item.delete()
-    return redirect('cart')
+# @login_required
+# def remove_from_cart(request, item_id):
+#     # Your existing remove from cart logic
+#     pass
