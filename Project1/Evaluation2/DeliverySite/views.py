@@ -77,3 +77,7 @@ def update_status(request, pk, status):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def privacy(request):
+    return render(request, 'privacy_policy.html')

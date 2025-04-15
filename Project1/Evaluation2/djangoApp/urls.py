@@ -15,5 +15,8 @@ urlpatterns = [
     path('pharmacy', views.pharmacy_view, name='pharmacy'),
     path('fruits', views.fruits_view, name='fruits'),
     path('all', views.all_view, name='all_products'),
+    path('snacks',views.snacks_view,name='snacks'),
+    path('beauty',views.beauty_view,name='beauty'),
+    path('profile/',views.profile_view,name='profile'),
 
 ]
