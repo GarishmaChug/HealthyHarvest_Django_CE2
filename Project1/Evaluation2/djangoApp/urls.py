@@ -17,10 +17,20 @@ urlpatterns = [
     path('beauty', views.beauty_view, name='beauty'),
     path('snacks', views.snacks_view, name='snacks'),
     path('faq',views.faq_view,name='faq'),
-    path('cart', views.cart_view, name='cart'),
+    path('cart/', views.cart_view, name='cart'),
     path('checkout', views.checkout_view, name='checkout'),
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
-    # path('product/<int:product_id>/', views.product_detail_view, name='product_detail'),
+    path('update-cart/<int:item_id>/', views.update_cart_quantity, name='update_cart_quantity'), # Added this line
+    path('add-product/', views.product_form, name='product_form'),
+    path('edit-product/<int:pk>/', views.product_form, name='product_edit'),
+    path('save-product/', views.product_save, name='product_save'),
+    path('delete-product/<int:pk>/', views.product_delete, name='product_delete'),
+    path('products/', views.product_list, name='product_list'),
+    path('terms/',views.terms,name='terms'),
+    path('profile/', views.profile_view, name='profile'),
+  
+    
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
 
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

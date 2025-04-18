@@ -6,6 +6,7 @@ urlpatterns = [
     path('applications/', views.admin_applications_view, name='admin_applications'),
     path('applications/<int:pk>/<str:status>/', views.update_status, name='update_status'),
     path('',views.home,name="delivery_home"),
-    path('logout/', views.logout_view, name='logout'),
-    path('privacy/',views.privacy,name='privacy')
+    path('privacy/',views.privacy,name='privacy'),
+    path('edit-application/<int:application_id>/', views.edit_application, name='edit_application'),
+    path('delete-application/<int:application_id>/', views.delete_application, name='delete_application'),
 ]

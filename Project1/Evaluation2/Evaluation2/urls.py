@@ -22,7 +22,6 @@ urlpatterns = [
     path('',include('djangoApp.urls')),
     path('delivery/',include('DeliverySite.urls')),
     # path('cart/' , include('djangoApp.urls')),
-    path('checkout/' , include('djangoApp.urls'))
 ]
 
 from django.conf import settings
